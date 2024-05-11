@@ -61,3 +61,15 @@
 .react-datepicker__input-container {
   width: 100% !important;
 }
+
+.rbc-month-view {
+  background-color: white !important;
+}
+
+.rbc-row-bg {
+  background-color: white !important;
+}
+
+.rbc-month-row {
+  background-color: white !important;
+}

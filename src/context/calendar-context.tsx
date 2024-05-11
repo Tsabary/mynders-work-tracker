@@ -3,14 +3,14 @@ import React, { createContext, useState } from "react";
 type CalendarContextProps = {
   selectedLog?: {
     _id: string;
-    comments: string;
+    // comments: string;
     start: Date;
     end: Date;
   } | null;
   setSelectedLog?: React.Dispatch<
     React.SetStateAction<{
       _id: string;
-      comments: string;
+      // comments: string;
       start: Date;
       end: Date;
     } | null>
@@ -26,7 +26,7 @@ export const CalendarProvider: React.FC<CalendarProviderProps> = ({
 }) => {
   const [selectedLog, setSelectedLog] = useState<{
     _id: string;
-    comments: string;
+    // comments: string;
     start: Date;
     end: Date;
   } | null>(null);

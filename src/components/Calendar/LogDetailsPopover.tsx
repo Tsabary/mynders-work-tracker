@@ -22,19 +22,35 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 
-const NewLogPopover: React.FC<PropsWithChildren> = ({ children }) => {
-  const { LogForm, SubmitButton } = useNewLogForm();
+const LogDetailsPopover: React.FC<
+  PropsWithChildren<{ onOpen: () => void; onClose: () => void }>
+> = ({ children, onOpen, onClose }) => {
+  const handleClose = () => {
+    onClose();
+    setOpen(false);
+  };
+  const { LogForm, SubmitButton } = useNewLogForm(handleClose);
 
   const [open, setOpen] = useState(false);
 
-  const title = "Add a Log";
-  const description = "Log a day or hours of work";
+  const title = "Log Details";
+  const description = "View or modify log";
 
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog
+        open={open}
+        onOpenChange={(state) => {
+          setOpen(state);
+          if (state) {
+            onOpen();
+          } else {
+            handleClose();
+          }
+        }}
+      >
         <DialogTrigger asChild>{children}</DialogTrigger>
-        <DialogContent className="">
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription>{description}</DialogDescription>
@@ -51,14 +67,24 @@ const NewLogPopover: React.FC<PropsWithChildren> = ({ children }) => {
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer
+      open={open}
+      onOpenChange={(state) => {
+        setOpen(state);
+        if (state) {
+          onOpen();
+        } else {
+          onClose();
+        }
+      }}
+    >
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader className="text-left pb-0">
+        <DrawerHeader className="text-left">
           <DrawerTitle>{title}</DrawerTitle>
           <DrawerDescription>{description}</DrawerDescription>
         </DrawerHeader>
-        <div className="p-4 pt-0">
+        <div className="p-4">
           <LogForm />
         </div>
         <DrawerFooter className="pt-2">
@@ -71,4 +97,4 @@ const NewLogPopover: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default NewLogPopover;
+export default LogDetailsPopover;

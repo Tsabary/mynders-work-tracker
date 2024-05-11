@@ -4,7 +4,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import {
   Calendar as BigCalender,
   momentLocalizer,
-  Components,
 } from "react-big-calendar";
 
 import moment from "moment";
@@ -19,10 +18,7 @@ import {
 } from "firebase/firestore";
 import useFirebase from "../../hooks/useFirebase";
 import useMynders from "../../hooks/useMynders";
-import useCalendar from "../../hooks/useCalendar";
-import { HoverCard } from "../ui/hover-card";
 import CustomEventCard from "./CustomEventCard";
-import EventHoverCard from "./EventHoverCard";
 import CustomMonthHeader from "./CustomMonthHeader";
 import CustomMonthTableHeader from "./CustomMonthTableHeader";
 
@@ -31,7 +27,6 @@ const localizer = momentLocalizer(moment);
 function Calendar() {
   const { firestore } = useFirebase();
   const { user } = useMynders();
-  const { selectedLog } = useCalendar();
   const [logs, setLogs] = useState<CalendarWorkLog[]>([]);
 
   const components = {
@@ -63,7 +58,7 @@ function Calendar() {
             _id: doc.id,
             start: (data.date_range.from as Timestamp).toDate(),
             end: (data.date_range.to as Timestamp).toDate(),
-            comments: data.comments,
+            // comments: data.comments,
           };
         });
         setLogs(docs);
@@ -79,19 +74,14 @@ function Calendar() {
 
   return (
     <div className="h-full w-full no-scrollbar">
-      <HoverCard open={!!selectedLog}>
-        <BigCalender
-          localizer={localizer}
-          events={logs}
-          defaultView="month"
-          views={["month", "week", "day"]}
-          timeslots={4}
-          step={15}
-          components={components}
-          tooltipAccessor={null}
-        />
-        {selectedLog && <EventHoverCard />}
-      </HoverCard>
+      <BigCalender
+        localizer={localizer}
+        events={logs}
+        defaultView="month"
+        views={["month"]}
+        components={components}
+        tooltipAccessor={null}
+      />
     </div>
   );
 }

@@ -13,9 +13,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/Plugin.tsx", // Path to your main component
-      name: "TimeOffTracker",
+      name: "WorkTracker",
       formats: ["umd"],
-      fileName: (format) => `time-off-tracker.${format}.js`,
+      fileName: (format) => `work-tracker.${format}.js`,
     },
     rollupOptions: {
       // Externalize peer dependencies
