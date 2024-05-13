@@ -1,12 +1,8 @@
-/* .rbc-header {
-  color: white;
-  font-size: 14px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px !important;
-  background: black;
-} */
+.rbc-header {
+  border-right: none !important;
+  border-left: none !important;
+  background-color: transparent !important;
+}
 
 .rbc-allday-cell {
   display: none;
@@ -16,23 +12,6 @@
   background-color: #555a58 !important;
 }
 
-.rbc-time-slot {
-  color: black;
-  z-index: 1;
-  font-size: 12px;
-}
-
-/* .rbc-time-slot:not(.rbc-today .rbc-time-slot) {
-    background-color: #eff4f7;
-  } */
-
-/*Event Styles*/
-.rbc-event,
-.rbc-background-event {
-  z-index: 2;
-  padding: 0px !important;
-  border: none !important;
-}
 
 .rbc-event-label {
   /* font-size: 10px !important;
@@ -46,6 +25,41 @@
   width: 100% !important;
 }
 
+
+.react-datepicker-wrapper {
+  width: 100% !important;
+}
+
+
+.rbc-month-view {
+  background-color: white !important;
+  border: none !important;
+}
+
+.rbc-day-bg {
+  border: none !important;
+}
+
+.rbc-event,
+.rbc-background-event {
+  z-index: 2;
+  padding: 0px !important;
+  border: none !important;
+}
+
+/* .rbc-time-slot {
+  color: black;
+  z-index: 1;
+  font-size: 12px;
+} */
+
+/* .rbc-time-slot:not(.rbc-today .rbc-time-slot) {
+    background-color: #eff4f7;
+  } */
+
+/*Event Styles*/
+
+
 /*Timeslots Customization*/
 /* .rbc-day-slot .rbc-time-slot:after {
     content: "";
@@ -54,22 +68,6 @@
     display: block;
   } */
 
-.react-datepicker-wrapper {
+/* .react-datepicker__input-container {
   width: 100% !important;
-}
-
-.react-datepicker__input-container {
-  width: 100% !important;
-}
-
-.rbc-month-view {
-  background-color: white !important;
-}
-
-.rbc-row-bg {
-  background-color: white !important;
-}
-
-.rbc-month-row {
-  background-color: white !important;
-}
+} */

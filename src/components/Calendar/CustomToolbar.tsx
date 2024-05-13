@@ -48,9 +48,10 @@ function CustomToolbar(props: ToolbarProps) {
 
   const CurrentTime = () => {
     return (
+      <div className="border rounded-md px-3 py-1.5">
       <label className="font-medium text-sm">
         {moment(props.date).format("DD/MM/YYYY")}
-      </label>
+      </label></div>
     );
   };
   const LogHoursTrigger = () => {
@@ -84,10 +85,11 @@ function CustomToolbar(props: ToolbarProps) {
 
   return (
     <>
-      <div className="hidden md:!flex justify-center items-center h-12 relative w-full">
+      <div className="hidden md:!flex justify-center items-center h-12 relative w-full md:!mb-6">
         <div className="absolute left-0 bottom-1.5">
           <TimeNavigator />
         </div>
+
 
         <CurrentTime />
 

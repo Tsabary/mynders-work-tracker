@@ -8,8 +8,10 @@ import { CalendarProvider } from "./context/calendar-context";
 
 function Plugin() {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center p-2 md:!p-6 overflow-y-auto no-scrollbar">
-      <Calendar />
+    <div className="absolute inset-0 p-2 md:!p-6 bg-white z-20">
+      <div className="h-full w-full">
+        <Calendar />
+      </div>
     </div>
   );
 }

@@ -1,10 +1,7 @@
 import "./schedule.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-import {
-  Calendar as BigCalender,
-  momentLocalizer,
-} from "react-big-calendar";
+import { Calendar as BigCalender, momentLocalizer } from "react-big-calendar";
 
 import moment from "moment";
 import CustomToolbar from "./CustomToolbar";
@@ -73,16 +70,14 @@ function Calendar() {
   }, []);
 
   return (
-    <div className="h-full w-full no-scrollbar">
-      <BigCalender
-        localizer={localizer}
-        events={logs}
-        defaultView="month"
-        views={["month"]}
-        components={components}
-        tooltipAccessor={null}
-      />
-    </div>
+    <BigCalender
+      localizer={localizer}
+      events={logs}
+      defaultView="month"
+      views={["month"]}
+      components={components}
+      tooltipAccessor={null}
+    />
   );
 }
 

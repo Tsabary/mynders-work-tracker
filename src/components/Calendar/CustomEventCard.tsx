@@ -20,7 +20,7 @@ function CustomEventCard({ event }: EventProps<any>) {
         }
         onClose={()=>setSelectedLog!(null)}
       >
-        <div className="text-white bg-blue-600 h-full text-sm py-1.5 px-2 border-none overflow-hidden text-ellipsis whitespace-nowrap w-full">
+        <div className="text-white bg-blue-600 h-full text-xs md:!text-sm p-0.5 md:!py-1.5 md:!px-2 border-none overflow-hidden text-ellipsis whitespace-nowrap w-full rounded">
           {`${calculateHourGap(start, end).hours} hours`}
         </div>
       </LogDetailsPopover>
