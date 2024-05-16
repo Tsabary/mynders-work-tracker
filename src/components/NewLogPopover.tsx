@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useNewLogForm from "../../hooks/useNewLogForm";
+import useNewLogForm from "../hooks/useNewLogForm";
 import {
   Drawer,
   DrawerClose,
@@ -20,12 +20,11 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "../ui/drawer";
+} from "./ui/drawer";
 
 const NewLogPopover: React.FC<PropsWithChildren> = ({ children }) => {
-  const { LogForm, SubmitButton } = useNewLogForm();
-
   const [open, setOpen] = useState(false);
+  const { LogForm, SubmitButton } = useNewLogForm(() => setOpen(false));
 
   const title = "Add a Log";
   const description = "Log a day or hours of work";
@@ -34,7 +33,7 @@ const NewLogPopover: React.FC<PropsWithChildren> = ({ children }) => {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{children}</DialogTrigger>
-        <DialogContent className="">
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription>{description}</DialogDescription>

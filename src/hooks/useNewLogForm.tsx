@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import {
   collection,
   deleteDoc,
@@ -6,13 +6,12 @@ import {
   setDoc,
   updateDoc,
 } from "firebase/firestore";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, Minus, Plus } from "lucide-react";
 
 import handleError from "../helpers/handleError";
 import useFirebase from "./useFirebase";
 import useMynders from "./useMynders";
 import DateTimePicker from "@/components/ui/date-time-picker";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import useCalendar from "./useCalendar";
@@ -32,17 +31,6 @@ function useNewLogForm(handleClose: () => void) {
   const [dayLengthNumber, setDayLengthNumber] = useState<number>(9);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useLayoutEffect(() => {
-    if (selectedLog) {
-      setDateRange({ from: selectedLog.start, to: selectedLog.end });
-      setDayLengthNumber(
-        calculateHourGap(selectedLog.start, selectedLog.end).hours
-      );
-    } else {
-      setDateRange({ from: null, to: null });
-    }
-  }, [selectedLog]);
-
   const handleCreate = async () => {
     try {
       if (!user || !dateRange.from || !dateRange.to || isSubmitting) return;
@@ -61,6 +49,7 @@ function useNewLogForm(handleClose: () => void) {
       });
 
       setDateRange({ from: null, to: null });
+      handleClose();
     } catch (err) {
       handleError(err, "Failed to create a new task");
     } finally {
@@ -82,7 +71,7 @@ function useNewLogForm(handleClose: () => void) {
           selectedLog!._id
         );
         await deleteDoc(logDocRef);
-        handleClose()
+        handleClose();
       }
     } catch (err) {
       handleError(err, "Failed ot delete log");
@@ -100,7 +89,7 @@ function useNewLogForm(handleClose: () => void) {
         selectedLog!._id
       );
       await updateDoc(logDocRef, { date_range: dateRange });
-      handleClose()
+      handleClose();
     } catch (err) {
       handleError(err, "Failed ot update log");
     } finally {
@@ -121,6 +110,21 @@ function useNewLogForm(handleClose: () => void) {
     });
   };
 
+  useEffect(() => {
+    handleSetDuration(dayLengthNumber);
+  }, [dayLengthNumber]);
+
+  useLayoutEffect(() => {
+    if (selectedLog) {
+      setDateRange({ from: selectedLog.start, to: selectedLog.end });
+      setDayLengthNumber(
+        calculateHourGap(selectedLog.start, selectedLog.end).hours
+      );
+    } else {
+      setDateRange({ from: null, to: null });
+    }
+  }, [selectedLog]);
+
   const LogForm = () => (
     <div className="grid gap-4 w-full">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 items-center w-full">
@@ -139,18 +143,28 @@ function useNewLogForm(handleClose: () => void) {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 items-center w-full">
         <Label className="text-left">Hours</Label>
-        <div className="col-span-3 flex gap-2">
-          <Input
-            type="number"
-            value={dayLengthNumber}
-            onChange={(e) => {
-              const time = Number(e.target.value);
-              if (time < 0 || time > 24) return;
-              setDayLengthNumber(time);
-              handleSetDuration(time);
+        <div className="col-span-3 flex gap-4 items-center">
+          <Button
+            size="icon"
+            variant="outline"
+            onClick={() => {
+              if (dayLengthNumber <= 1) return;
+              setDayLengthNumber((time) => time - 1);
             }}
-            className="w-20"
-          />
+          >
+            <Minus className="w-4 h-4" />
+          </Button>
+          <p className="text-lg w-6 text-center">{dayLengthNumber}</p>
+          <Button
+            size="icon"
+            variant="outline"
+            onClick={() => {
+              if (dayLengthNumber >= 24) return;
+              setDayLengthNumber((time) => time + 1);
+            }}
+          >
+            <Plus className="w-4 h-4" />
+          </Button>
         </div>
       </div>
     </div>

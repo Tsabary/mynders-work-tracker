@@ -3,7 +3,7 @@ import { Navigate, ToolbarProps } from "react-big-calendar";
 import { Separator } from "@/components/ui/separator";
 // import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "../ui/button";
-import NewLogPopover from "./NewLogPopover";
+import NewLogPopover from "../NewLogPopover";
 
 function CustomToolbar(props: ToolbarProps) {
   // const goToDayView = () => {
