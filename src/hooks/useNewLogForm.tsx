@@ -134,6 +134,7 @@ function useNewLogForm(handleClose: () => void) {
         <div className="col-span-3">
           <DateTimePicker
             id="log-start"
+            disabled={isSubmitting}
             date={dateRange.from}
             setDate={(newFromDate) => {
               newFromDate && handleSetDuration(9, newFromDate);
@@ -147,6 +148,7 @@ function useNewLogForm(handleClose: () => void) {
           <Button
             size="icon"
             variant="outline"
+            disabled={isSubmitting}
             onClick={() => {
               if (dayLengthNumber <= 1) return;
               setDayLengthNumber((time) => time - 1);
@@ -158,6 +160,7 @@ function useNewLogForm(handleClose: () => void) {
           <Button
             size="icon"
             variant="outline"
+            disabled={isSubmitting}
             onClick={() => {
               if (dayLengthNumber >= 24) return;
               setDayLengthNumber((time) => time + 1);

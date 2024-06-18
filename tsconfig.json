@@ -26,5 +26,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "recycle_bin/CustomEventCard copy.tsx", "recycle_bin/EventHoverCard.tsx"]
+  "include": ["src"]
 }

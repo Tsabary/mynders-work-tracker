@@ -20,7 +20,7 @@ root.render(
           activated_plugins: [
             {
               plugin_id: "com.mynders.work_log",
-              plugin_name: "Sticky Notes",
+              plugin_name: "Work Tracker",
               plugin_icon: "",
             },
           ],
